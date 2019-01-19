@@ -27,7 +27,7 @@ app.set("view engine", "handlebars");
 
 
 // Database configuration with mongoose
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoosearticles";
 
 if (process.env.MONGODB_URI) 
 {
