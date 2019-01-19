@@ -7,7 +7,7 @@ var scrape = function(callback) {
 
   var articlesArr = [];
 
-  request("https://www.nytimes.com/", function(error, response, html) {
+  request("http://www.nytimes.com/", function(error, response, html) {
 
       var $ = cheerio.load(html);
 
