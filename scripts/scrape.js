@@ -1,61 +1,32 @@
-// Require axios and cheerio dependency to make our scrape
-var axios = require("axios");
+// Our scraping tools
+var request = require("request");
 var cheerio = require("cheerio");
 
-// Function to scrape the New York Times website
-var scrape = function() 
-{
-    // Scrape the New York Times website
-    return axios.get("http://www.nytimes.com").then(function(res){
-        var $ = cheerio.load(res.data);
-        
-        // Log our scraping
-        console.log("scraping");
-        
-        // Articles array to save our article information
-        var articles = [];
+//scrape articles from the New YorK Times
+var scrape = function(callback) {
 
-   
-    $("div.css-1100km").each(function(i, element) 
-    {
-        // Grab the heading of the article
-        var head = $(this)
-            .find("h2")
-            .text()
-            .trim();
+  var articlesArr = [];
 
-        // Grab the URL of the article
-        var url = $(this)
-            .find("a")
-            .attr("href");
+  request("https://www.nytimes.com/", function(error, response, html) {
 
-        // Grab the Summary of the article
-        var sum = $(this)
-            .find("p")
-            .text()
-            .trim();
+      var $ = cheerio.load(html);
 
-        // So long as our headline and sum and url aren't empty or undefined, do the following
-        if (head && sum && url) 
-        {
-            // Remove extra characters to establish a neat look
-            var headNeat = head.replace(/(\r\n|\n|\r|\t|\s+)/gm, " ").trim();
-            var sumNeat = sum.replace(/(\r\n|\n|\r|\t|\s+)/gm, " ").trim();
 
-        // Push the data to the articles array
-        var dataToAdd = 
-        {
-            headline: headNeat,
-            summary: sumNeat,
-            url: "https://www.nytimes.com" + url
-        };
+      $("h2.story-heading").each(function(i, element) {
 
-        articles.push(dataToAdd);
-      }
-    });
-    // Return the articles found to the user
-    return articles;
+          var result = {};
+
+          // Add the text and href of every link, and save them as properties of the result object
+          result.title = $(this).children("a").text();
+          result.link = $(this).children("a").attr("href");
+
+          if (result.title !== "" && result.link !== "") {
+              articlesArr.push(result);
+          }
+      });
+      callback(articlesArr);
   });
+
 };
 
 // Export the function for other files to use
