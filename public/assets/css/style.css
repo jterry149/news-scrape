@@ -1,5 +1,5 @@
 body {
-	background-image: url(../images/Newspaper-Free-Download-PNG.png);
+	background-image: url(/public/assets/images/newspaper.png);
 	background-position: center;
 	font-family: 'Roboto', sans-serif;
 }
@@ -44,7 +44,7 @@ h1, h2, h3, h4 {
 }
 
 .modal-body{
-	background-image: url(../images/Newspaper-Free-Download-PNG.png);
+	background-image: url(/public/assets/images/newspaper.png);
 	background-size: cover;
 	background-position: center;
 }
