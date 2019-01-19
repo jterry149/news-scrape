@@ -3,6 +3,10 @@ var express = require("express");
 var mongoose = require("mongoose");
 var exphbs = require("express-handlebars");
 
+// Requiring our Note and Article models
+var Note = require("./models/Note");
+var Article = require("./models/Article");
+
 // Set port
 var Port = process.env.PORT || 3000;
 
@@ -44,6 +48,7 @@ require("./config/routes")(router);
 app.use(router);
 
 // setup listener for the appliation
-app.listen(Port, function() {
+app.listen(Port, function() 
+{
   console.log("Listening app is running on port " + Port);
 });

@@ -1,9 +1,7 @@
 // Variables used for the particuler routes
-var scrape = require("../scripts/scrape");
 var Article = require("../models/Article");
 var Note = require("../models/Note");
 var articlesController = require("../controllers/articles");
-var notesController = require("../controllers/notes");
 
 module.exports = function(router) 
 {
